@@ -1,0 +1,71 @@
+{
+  "folders": [
+    {
+      "name": "🔧 Backend (FastAPI)",
+      "path": "backend"
+    },
+    {
+      "name": "🎨 Frontend (Vue)",
+      "path": "frontend"
+    },
+    {
+      "name": "📦 Root (Config & Docs)",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/__pycache__": true,
+      "**/.pytest_cache": true,
+      "**/dist": true,
+      "**/.venv": false
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/__pycache__": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "Vue.volar",
+      "esbenp.prettier-vscode",
+      "humao.rest-client"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Backend: FastAPI",
+        "type": "python",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": ["api.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+        "cwd": "${workspaceFolder:🔧 Backend (FastAPI)}",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder:🔧 Backend (FastAPI)}"
+        }
+      },
+      {
+        "name": "Frontend: Vite Dev Server",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder:🎨 Frontend (Vue)}",
+        "console": "integratedTerminal"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Full Stack (Backend + Frontend)",
+        "configurations": ["Backend: FastAPI", "Frontend: Vite Dev Server"],
+        "stopAll": true
+      }
+    ]
+  }
+}

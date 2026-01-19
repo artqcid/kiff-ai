@@ -1,0 +1,48 @@
+# Docker Compose für KIFF AI Deployment
+
+version: '3.8'
+
+services:
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: kiff-qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: kiff-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - LLM_SERVER_URL=${LLM_SERVER_URL}
+      - MCP_SERVER_URL=${MCP_SERVER_URL}
+    depends_on:
+      - qdrant
+    volumes:
+      - ./config:/app/config
+      - ./documents:/app/documents
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: kiff-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
