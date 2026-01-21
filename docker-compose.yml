@@ -1,6 +1,6 @@
 # Docker Compose für KIFF AI Deployment
 
-version: '3.8'
+version: "3.8"
 
 services:
   # Qdrant Vector Database
@@ -24,11 +24,11 @@ services:
     environment:
       - QDRANT_URL=http://qdrant:6333
       - LLM_SERVER_URL=${LLM_SERVER_URL}
-      - MCP_SERVER_URL=${MCP_SERVER_URL}
     depends_on:
       - qdrant
     volumes:
-      - ./config:/app/config
+      - ./backend/config:/app/config
+      - ./backend/cache:/app/cache
       - ./documents:/app/documents
     restart: unless-stopped
 

@@ -13,7 +13,8 @@ Write-Host "1. Checking Python installation..." -ForegroundColor Yellow
 try {
     $pythonVersion = python --version
     Write-Host "   ✓ Python found: $pythonVersion" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "   ✗ Python not found! Please install Python 3.11+" -ForegroundColor Red
     exit 1
 }
@@ -23,7 +24,8 @@ Write-Host "2. Checking Node.js installation..." -ForegroundColor Yellow
 try {
     $nodeVersion = node --version
     Write-Host "   ✓ Node.js found: $nodeVersion" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "   ✗ Node.js not found! Please install Node.js 20+" -ForegroundColor Red
     exit 1
 }
@@ -33,7 +35,8 @@ Write-Host "3. Setting up Python virtual environment..." -ForegroundColor Yellow
 if (-not (Test-Path "venv")) {
     python -m venv venv
     Write-Host "   ✓ Virtual environment created" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "   ✓ Virtual environment already exists" -ForegroundColor Green
 }
 
@@ -48,7 +51,8 @@ Push-Location backend
 try {
     pip install -r requirements.txt
     Write-Host "   ✓ Backend dependencies installed" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "   ✗ Failed to install backend dependencies" -ForegroundColor Red
     Pop-Location
     exit 1
@@ -61,7 +65,8 @@ Push-Location frontend
 try {
     npm install
     Write-Host "   ✓ Frontend dependencies installed" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "   ✗ Failed to install frontend dependencies" -ForegroundColor Red
     Pop-Location
     exit 1
@@ -75,7 +80,8 @@ foreach ($dir in $configDirs) {
     if (-not (Test-Path $dir)) {
         New-Item -ItemType Directory -Path $dir | Out-Null
         Write-Host "   ✓ Created directory: $dir" -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Host "   ✓ Directory already exists: $dir" -ForegroundColor Green
     }
 }
@@ -88,12 +94,12 @@ if (-not (Test-Path $envFile)) {
 # KIFF AI Backend Configuration
 QDRANT_URL=http://localhost:6333
 LLM_SERVER_URL=http://localhost:8080
-MCP_SERVER_URL=http://localhost:3000
 ENVIRONMENT=development
 LOG_LEVEL=info
 "@ | Out-File -FilePath $envFile -Encoding UTF8
     Write-Host "   ✓ Created .env file: $envFile" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "   ✓ .env file already exists" -ForegroundColor Green
 }
 

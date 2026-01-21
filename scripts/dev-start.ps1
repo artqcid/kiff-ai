@@ -31,40 +31,23 @@ foreach ($port in $portsToCheck) {
 Write-Host "  ✓ All ports available" -ForegroundColor Green
 Write-Host ""
 
-# Start backend in new terminal
-Write-Host "Starting backend server..." -ForegroundColor Yellow
-$backendScript = {
-    Set-Location $using:PWD
-    & .\venv\Scripts\Activate.ps1
-    Set-Location backend\api
-    python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
-}
-Start-Process pwsh -ArgumentList "-NoExit", "-Command", "& {$backendScript}"
-Write-Host "  ✓ Backend starting on http://localhost:8000" -ForegroundColor Green
-Write-Host "  ✓ API Docs: http://localhost:8000/docs" -ForegroundColor Green
-
-# Wait a bit for backend to initialize
-Start-Sleep -Seconds 2
-
-# Start frontend in new terminal
-Write-Host "Starting frontend server..." -ForegroundColor Yellow
-$frontendScript = {
-    Set-Location $using:PWD
-    Set-Location frontend
-    npm run dev
-}
-Start-Process pwsh -ArgumentList "-NoExit", "-Command", "& {$frontendScript}"
-Write-Host "  ✓ Frontend starting on http://localhost:5173" -ForegroundColor Green
-
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  Development Servers Started! ✓" -ForegroundColor Green
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Access your application:" -ForegroundColor Yellow
-Write-Host "  • Frontend: http://localhost:5173" -ForegroundColor White
-Write-Host "  • Backend API: http://localhost:8000" -ForegroundColor White
-Write-Host "  • API Documentation: http://localhost:8000/docs" -ForegroundColor White
+Write-Host "This script is deprecated. Please use VS Code Tasks instead:" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "To stop servers, run: .\scripts\dev-stop.ps1" -ForegroundColor Yellow
+Write-Host "Quick Start:" -ForegroundColor Cyan
+Write-Host "  1. Press Ctrl+Shift+P" -ForegroundColor White
+Write-Host "  2. Type 'Tasks: Run Task'" -ForegroundColor White
+Write-Host "  3. Select 'Start: All Services (LLM + Backend + Frontend)'" -ForegroundColor White
+Write-Host ""
+Write-Host "Or press Ctrl+Shift+B to run the default build task" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Available Tasks:" -ForegroundColor Cyan
+Write-Host "  • Start: All Services (LLM + Backend + Frontend)" -ForegroundColor White
+Write-Host "  • Start: Backend + Frontend" -ForegroundColor White
+Write-Host "  • LLM: Start Server" -ForegroundColor White
+Write-Host "  • Stop: All Services" -ForegroundColor White
 Write-Host ""

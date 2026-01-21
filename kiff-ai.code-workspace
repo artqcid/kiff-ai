@@ -2,16 +2,16 @@
   "folders": [
     {
       "name": "🔧 Backend (FastAPI)",
-      "path": "backend"
+      "path": "backend",
     },
     {
       "name": "🎨 Frontend (Vue)",
-      "path": "frontend"
+      "path": "frontend",
     },
     {
       "name": "📦 Root (Config & Docs)",
-      "path": "."
-    }
+      "path": ".",
+    },
   ],
   "settings": {
     "files.exclude": {
@@ -19,13 +19,13 @@
       "**/__pycache__": true,
       "**/.pytest_cache": true,
       "**/dist": true,
-      "**/.venv": false
+      "**/.venv": false,
     },
     "search.exclude": {
       "**/node_modules": true,
       "**/dist": true,
-      "**/__pycache__": true
-    }
+      "**/__pycache__": true,
+    },
   },
   "extensions": {
     "recommendations": [
@@ -33,8 +33,8 @@
       "ms-python.vscode-pylance",
       "Vue.volar",
       "esbenp.prettier-vscode",
-      "humao.rest-client"
-    ]
+      "humao.rest-client",
+    ],
   },
   "launch": {
     "version": "0.2.0",
@@ -44,28 +44,51 @@
         "type": "python",
         "request": "launch",
         "module": "uvicorn",
-        "args": ["api.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+        "args": [
+          "api.main:app",
+          "--reload",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8000",
+        ],
         "cwd": "${workspaceFolder:🔧 Backend (FastAPI)}",
         "env": {
-          "PYTHONPATH": "${workspaceFolder:🔧 Backend (FastAPI)}"
-        }
+          "PYTHONPATH": "${workspaceFolder:🔧 Backend (FastAPI)}",
+        },
       },
       {
         "name": "Frontend: Vite Dev Server",
         "type": "node",
         "request": "launch",
         "runtimeExecutable": "npm",
-        "runtimeArgs": ["run", "dev"],
+        "runtimeArgs": [
+          "run",
+          "dev"
+        ],
         "cwd": "${workspaceFolder:🎨 Frontend (Vue)}",
-        "console": "integratedTerminal"
-      }
+        "console": "integratedTerminal",
+      },
     ],
     "compounds": [
       {
         "name": "Full Stack (Backend + Frontend)",
-        "configurations": ["Backend: FastAPI", "Frontend: Vite Dev Server"],
-        "stopAll": true
-      }
-    ]
-  }
+        "configurations": [
+          "Backend: FastAPI",
+          "Frontend: Vite Dev Server"
+        ],
+        "stopAll": true,
+      },
+    ],
+  },
+}     {
+  "name": "Full Stack (Backend + Frontend)",
+  "configurations": [
+    "Backend: FastAPI",
+    "Frontend: Vite Dev Server"
+  ],
+  "stopAll": true,
+},
+],
+},
 }
