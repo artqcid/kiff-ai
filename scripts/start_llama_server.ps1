@@ -3,7 +3,7 @@ Get-Process llama-server -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep -Milliseconds 300
 
 # Build argument list for Mistral 7B Instruct
-$args = @(
+$serverArgs = @(
   "--model", "D:\AI-Models\llama\mistral\mistral-7b-instruct-v0.2.Q4_K_M.gguf",
   "--port", "8080",
   "--ctx-size", "8192",
@@ -25,6 +25,6 @@ $args = @(
 # Start llama-server
 Start-Process `
   -FilePath "C:\llama\llama-server.exe" `
-  -ArgumentList $args `
+  -ArgumentList $serverArgs `
   -NoNewWindow `
   -PassThru
