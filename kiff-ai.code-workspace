@@ -3,6 +3,11 @@
     {
       "name": "🔧 Backend (FastAPI)",
       "path": "backend",
+      "settings": {
+        "python.analysis.extraPaths": [
+          ".."
+        ],
+      },
     },
     {
       "name": "🎨 Frontend (Vue)",
@@ -81,14 +86,4 @@
       },
     ],
   },
-}     {
-  "name": "Full Stack (Backend + Frontend)",
-  "configurations": [
-    "Backend: FastAPI",
-    "Frontend: Vite Dev Server"
-  ],
-  "stopAll": true,
-},
-],
-},
 }
