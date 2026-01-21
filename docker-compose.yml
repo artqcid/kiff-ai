@@ -1,8 +1,20 @@
 # Docker Compose für KIFF AI Deployment
 
-version: "3.8"
-
 services:
+  # Ollama (LLM Server) - For local dev: use native Windows Ollama instead (better RAM usage)
+  # Uncomment for production deployment:
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: kiff-ollama
+  #   ports:
+  #     - "11434:11434"
+  #   environment:
+  #     - OLLAMA_KEEP_ALIVE=5m
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #     - D:/AI-Models/llama:/models:ro
+  #   restart: unless-stopped
+
   # Qdrant Vector Database
   qdrant:
     image: qdrant/qdrant:latest
@@ -23,7 +35,7 @@ services:
       - "8000:8000"
     environment:
       - QDRANT_URL=http://qdrant:6333
-      - LLM_SERVER_URL=${LLM_SERVER_URL}
+      - LLM_SERVER_URL=${LLM_SERVER_URL:-http://host.docker.internal:11434}
     depends_on:
       - qdrant
     volumes:
@@ -46,3 +58,5 @@ services:
 
 volumes:
   qdrant_data:
+  # ollama_data:  # Uncomment if using Docker Ollama
+  ollama_data:

@@ -1,0 +1,2 @@
+FROM D:/AI-Models/llama/mistral/mistral-7b-instruct-v0.2.Q4_K_M.gguf
+PARAMETER num_gpu 25

@@ -239,17 +239,7 @@ Frontend läuft auf: **http://localhost:5173**
 }
 ```
 
-**servers_kiff.json** - Server-Konfiguration
-
-```json
-{
-  "llama_server": {
-    "launch_script": "scripts/start_llama_server.ps1",
-    "health_check_url": "http://localhost:8080/health",
-    "startup_timeout_seconds": 30
-  }
-}
-```
+**servers_kiff.json** - (veraltet) frühere llama.cpp-Start-Konfig; wird mit Ollama nicht mehr genutzt.
 
 ### Verzeichnisstruktur
 
@@ -295,17 +285,14 @@ kiff-ai/
 
 ### Server-Start in UI funktioniert nicht
 
-- ✅ Scripts vorhanden in `scripts/`?
-  - `start_llama_server.ps1` / `start_llama_server.sh`
-  - `start_mcp_server.ps1` / `start_mcp_server.sh`
-- ✅ llama.cpp Binary vorhanden?
-- ✅ Config `servers_kiff.json` korrekt?
+- ✅ Docker Compose läuft? (Ollama-Service muss erreichbar sein)
+- ✅ Port 11434 frei? (Ollama)
 - ✅ Backend-Logs prüfen (Terminal mit Backend)
 
 ### Chat funktioniert nicht
 
 - ✅ Backend läuft? http://localhost:8000/health
-- ✅ llama.cpp Server läuft? http://localhost:8080/health
+- ✅ Ollama läuft? http://localhost:11434/api/tags
 - ✅ Status in Settings-View prüfen
 - ✅ Browser Console öffnen (F12) → Fehler sichtbar?
 - ✅ Network Tab prüfen → API Calls erfolgreich?
